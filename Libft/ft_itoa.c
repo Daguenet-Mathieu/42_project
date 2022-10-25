@@ -16,13 +16,13 @@ char	*ft_itoa(int n)
 	s[size] = '\0';
 	if (n == 0)
 	{
-		c[0] = 0;
-		return (c);
+		s[0] = 0;
+		return (s);
 	}
 	while (n > 0)
 	{
-		c[size - 1] = (n % 10) + 48;
+		s[size - 1] = (n % 10) + 48;
 		n = n / 10;
 	}
-	return (c);
+	return (s);
 }

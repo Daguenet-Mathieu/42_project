@@ -8,7 +8,7 @@ char	*strchr(const char *string, int searchedChar)
 	while (string[i] || !searchedChar)
 	{
 		if (string[i] == searchedChar || !searchedChar)
-			return (&string[i]);
+			return ((char *)&string[i]);
 		i++;
 	}
 	return (NULL);

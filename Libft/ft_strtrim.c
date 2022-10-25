@@ -1,6 +1,6 @@
 #include "libft.h"
 
-static int	fy_is_in_set(char c, char *set)
+static int	ft_is_in_set(char c, char *set)
 {
 	size_t	i;
 
@@ -19,14 +19,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	i;
 	size_t	j;
 	size_t	c;
-	char	s2;
+	char	*s2;
 
 	i = 0;
 	j = ft_strlen(s1) - 1;
 	c = 0;
-	while (ft_is_in_set(s1[i]))
+	while (ft_is_in_set(s1[i], (char*)set))
 		i++;
-	while (ft_is_in_set(s2[j]))
+	while (ft_is_in_set(s2[j], (char*) set))
 		j--;
 	s2 = malloc(sizeof(char) * ((j - i + 1) + 1));
 	while (i <= j)

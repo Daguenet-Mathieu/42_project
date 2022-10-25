@@ -3,10 +3,10 @@
 char	*strdup(const char *s)
 {
 	int	i;
-	char	*dst;
+	char	*dest;
 
 	i = 0;
-	dst = malloc(sizeof(char)ft_strlen(s) + 1);
+	dest = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!dest)
 		return (NULL);
 	while (s[i])

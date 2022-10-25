@@ -1,8 +1,8 @@
 #include "libft.h"
 
-void *ft_calloc(size_t nmemb, size_t size);
+void *ft_calloc(size_t nmemb, size_t size)
 {
-	void	*p;
+	char	*p;
 	size_t	i;
 
 	i = 0;
@@ -14,5 +14,5 @@ void *ft_calloc(size_t nmemb, size_t size);
 		p[i] = 0;
 		i++;
 	}
-	return (p);
+	return ((void *)p);
 }

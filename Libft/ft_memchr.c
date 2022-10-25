@@ -3,12 +3,14 @@
 void *memchr(const void *s, int c, size_t n)
 {
 	size_t	i;
+	unsigned char	*ps;
 
 	i = 0;
-	while ((unsigned char)s[i] && i < n || !c)
+	ps = (unsigned char *) s;
+	while (ps[i] && i < n || !c)
 	{
-		if ((unsigned char)s[i] == c || !c)
-			return (&s[i]);
+		if (ps[i] == c || !c)
+			return ((void *)&ps[i]);
 		i++;
 	}
 	return (NULL);
