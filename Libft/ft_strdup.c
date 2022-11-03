@@ -17,3 +17,8 @@ char	*ft_strdup(const char *s)
 	dest[i] = '\0';
 	return (dest);
 }
+
+int main(int argc, char **argv)
+{
+	printf("%s\n", ft_strdup(argv[1]));
+}
