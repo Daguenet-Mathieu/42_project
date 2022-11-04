@@ -3,18 +3,18 @@
 void    *ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t	i;
-	char	*pdest;
-	char	*psrc;
+	unsigned char	*cdest;
+	unsigned char	*csrc;
 
 	i = 0;
-	pdest = (char *) dest;
-	psrc = (char *) src;
-	if (psrc < pdest)
+	cdest = (unsigned char *) dest;
+	csrc = (unsigned char *) src;
+	if (csrc < cdest)
 	{
-		i = n - 1;
-		while (i >= 0)
+		i = n;
+		while (i > 0)
 		{
-			pdest[i] = psrc[i];
+			cdest[i - 1] = csrc[i - 1];
 			i--;
 		}
 	}
@@ -22,7 +22,7 @@ void    *ft_memmove(void *dest, const void *src, size_t n)
 	{
 		while (i < n)
 		{
-			pdest[i] = psrc[i];
+			cdest[i] = csrc[i];
 			i++;
 		}
 	}

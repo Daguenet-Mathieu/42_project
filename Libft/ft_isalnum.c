@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	isalnum(int c)
+int	ft_isalnum(int c)
 {
 	int	i;
 
