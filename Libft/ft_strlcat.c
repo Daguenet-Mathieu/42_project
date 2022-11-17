@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:32:39 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/07 11:32:41 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:59:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	srclen = ft_strlen(src);
 	if (size <= destlen)
 		return (size + srclen);
-	while (src[i] && i < size - 1)
+	while (src[i] && (destlen + i) < size - 1)
 	{
 		dest[destlen + i] = src[i];
 		i++;

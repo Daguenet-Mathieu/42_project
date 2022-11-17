@@ -6,13 +6,13 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:27:29 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/11 22:51:26 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/16 22:03:20 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	get_nb(long long int *nb, int size, char *s)
+static void	get_nb(long long int *nb, int size, char *s)
 {
 	int	i;
 
@@ -27,6 +27,8 @@ static char	get_nb(long long int *nb, int size, char *s)
 
 static void	get_size(long long int nb, int *size)
 {
+	if (nb == 0)
+		*size = 1;
 	while (nb > 0)
 	{
 		(*size)++;
@@ -52,6 +54,8 @@ char	*ft_itoa(int n)
 	}
 	get_size(nb, &size);
 	s = malloc(sizeof(char) * (size + 1));
+	if (!s)
+		return (NULL);
 	if (nb == 0)
 		s[0] = '0';
 	if(neg)

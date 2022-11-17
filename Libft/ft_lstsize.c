@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:39:26 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/09 23:34:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:19:16 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int ft_lstsize(t_list *lst)
 	i = 0;
 	if (!lst)
 		return (i);
-	while(lst->next)
+	while(lst)
 	{
 		lst = lst->next;
 		i++;

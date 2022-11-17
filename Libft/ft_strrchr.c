@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:34:47 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/08 15:07:28 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:55:56 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strrchr(const char *string, int c)
 		return ((char *)&string[i]);
 	while (i >= 0)
 	{
-		if (string[i] == c)
+		if ((unsigned char)string[i] == (unsigned char)c)
 			return ((char*)&string[i]);
 		i--;
 	}

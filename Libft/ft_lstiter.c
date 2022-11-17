@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:47:06 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/09 23:53:40 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/16 22:19:46 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	while (lst->next)
+	if (!f)
+		return ;
+	while (lst)
 	{
 		f(lst->content);
 		lst = lst->next;

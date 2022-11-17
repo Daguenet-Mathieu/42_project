@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:33:09 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/07 11:33:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:51:31 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 
 	i = 0;
 	slen = ft_strlen(src);
+	if  (size == 0)
+		return  (slen);
 	while (src[i] && i < (size - 1))
 	{
 		dest[i] = src [i];
