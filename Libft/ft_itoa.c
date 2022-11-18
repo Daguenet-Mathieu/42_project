@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:27:29 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/16 22:03:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:22:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	get_nb(long long int *nb, int size, char *s)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	while (*nb > 0)
 	{
 		s[size - 1 - i] = (*nb % 10) + 48;
@@ -58,7 +58,7 @@ char	*ft_itoa(int n)
 		return (NULL);
 	if (nb == 0)
 		s[0] = '0';
-	if(neg)
+	if (neg)
 		s[0] = '-';
 	get_nb(&nb, size, s);
 	s[size] = '\0';

@@ -6,20 +6,20 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:39:26 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/16 15:19:16 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:10:28 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
 	i = 0;
 	if (!lst)
 		return (i);
-	while(lst)
+	while (lst)
 	{
 		lst = lst->next;
 		i++;

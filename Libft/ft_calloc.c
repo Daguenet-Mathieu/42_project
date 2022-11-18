@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:55:58 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/17 21:09:29 by madaguen         ###   ########.fr       */
+/*   Created: 2022/11/07 11:24:25 by madaguen          #+#    #+#             */
+/*   Updated: 2022/11/17 20:29:00 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_list	*new;	
+	char	*p;
+	size_t	i;
 
-	new = malloc(sizeof(t_list));
-	if (!new)
+	i = 0;
+	if (nmemb == 0 || size == 0 || nmemb > SIZE_MAX / size)
 		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	p = malloc(nmemb * size);
+	if (!p)
+		return (NULL);
+	while (i < nmemb * size)
+	{
+		p[i] = 0;
+		i++;
+	}
+	return ((void *)p);
 }

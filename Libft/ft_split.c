@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:31:11 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/17 13:50:56 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:21:14 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	get_nb_word(char *s, char c)
 {
 	int	i;
 	int	word;
+
 	i = 0;
 	word = 0;
 	if (*s == 0)
@@ -39,11 +40,11 @@ static char	get_nb_word(char *s, char c)
 	return (word);
 }
 
-static char	*get_word(char *s, char c,int *i)
+static char	*get_word(char *s, char c, int *i)
 {
 	char	*new_word;
-	int	a;
-	int	j;
+	int		a;
+	int		j;
 
 	a = 0;
 	j = 0;
@@ -81,10 +82,10 @@ static void	ft_freetab(char **tab)
 
 char	**ft_split(char const *s, char c)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	**tab;
-	int	nb_word;
+	int		nb_word;
 
 	i = 0;
 	j = 0;
@@ -107,4 +108,3 @@ char	**ft_split(char const *s, char c)
 	tab[j] = NULL;
 	return (tab);
 }
-

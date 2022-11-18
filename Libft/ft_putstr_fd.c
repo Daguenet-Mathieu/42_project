@@ -6,13 +6,13 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:30:40 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/07 11:30:42 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:13:09 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 

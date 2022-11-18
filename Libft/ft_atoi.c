@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:20:09 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/12 18:42:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:15:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_atoi(const char *nptr)
 	i = 0;
 	sign = 1;
 	res = 0;
-
 	while ((nptr[i] && (nptr[i] <= 13 && nptr[i] >= 9)) || nptr[i] == 32)
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')

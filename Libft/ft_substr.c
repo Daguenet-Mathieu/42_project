@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:36:46 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/17 16:36:27 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:14:39 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	size_t	j;
 	char	*p;
-	
+
 	if (s == NULL || *s == 0)
 		return (NULL);
 	if (start >= ft_strlen(s))
