@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_put_unsigned.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 17:58:28 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/23 20:49:48 by madaguen         ###   ########.fr       */
+/*   Created: 2022/11/23 15:55:00 by madaguen          #+#    #+#             */
+/*   Updated: 2022/11/23 16:13:19 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+int ft_put_unsigned(unsigned int n)
 {
-	va_list	args;
 	int	i;
-	int	len;
-	
+
 	i = 0;
-	len = 0;
-	if (!format)
-		return (-1);
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] != '%')
-			len += ft_putchar(format[i]);
-		else if (format[i + 1] && format[i] == '%' && isinchar(format[i + 1]))
-			len += handdle_letter(format[1 + i++], args);
-		else
-			len += ft_putchar(format[i]);
-		i++;
-	}
-	va_end(args);
-	return (len);
+	if (n >= 10 )
+		i += ft_put_unsigned(n / 10);
+	i += ft_putchar((n % 10) + 48);
+	return (i); 
 }

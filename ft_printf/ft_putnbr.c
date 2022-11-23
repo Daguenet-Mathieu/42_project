@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 17:58:28 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/23 20:49:48 by madaguen         ###   ########.fr       */
+/*   Created: 2022/11/23 15:53:18 by madaguen          #+#    #+#             */
+/*   Updated: 2022/11/23 15:53:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+
+int	ft_putnbr(int nb)
 {
-	va_list	args;
-	int	i;
-	int	len;
-	
+	int				i;
+	unsigned int	n;
+
 	i = 0;
-	len = 0;
-	if (!format)
-		return (-1);
-	va_start(args, format);
-	while (format[i])
+	if (nb < 0)
 	{
-		if (format[i] != '%')
-			len += ft_putchar(format[i]);
-		else if (format[i + 1] && format[i] == '%' && isinchar(format[i + 1]))
-			len += handdle_letter(format[1 + i++], args);
-		else
-			len += ft_putchar(format[i]);
-		i++;
+		i += ft_putchar('-');
+		nb = nb * -1;
 	}
-	va_end(args);
-	return (len);
+	n = nb;
+	if (n >= 10 )
+		i += ft_putnbr(n / 10);
+	i += ft_putchar((n % 10) + 48);
+	return (i); 
 }
