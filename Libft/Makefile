@@ -6,7 +6,7 @@
 #    By: madaguen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:04:28 by madaguen          #+#    #+#              #
-#    Updated: 2022/11/18 13:15:45 by madaguen         ###   ########.fr        #
+#    Updated: 2022/11/22 20:35:02 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCS		= ft_atoi.c		\
 			ft_tolower.c	\
 			ft_toupper.c
 OBJS		= ${SRCS:.c=.o}
-CC			= gcc
+HEADER		= libft.h
+CC			= cc
 FLAGS		= -Wall -Wextra -Werror
 NAME		= libft.a
 BONUS		= ft_lstnew.c			\
@@ -60,9 +61,9 @@ BONUS		= ft_lstnew.c			\
 OBJS_BONUS	= ${BONUS:.c=.o}
 
 %.o: %.c ${SRCS}
-		$(CC) $(FLAGS) -c -o $@ $< -L. -lft
+		$(CC) $(FLAGS) -c -o $@ $<
 
-$(NAME): ${OBJS}
+$(NAME): ${OBJS} ${HEADER}
 		ar rcs ${NAME} ${OBJS}
 
 all: $(NAME)

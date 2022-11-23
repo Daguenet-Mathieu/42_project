@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:36:46 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/17 21:14:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:27:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	j;
 	char	*p;
 
-	if (s == NULL || *s == 0)
+	if (!s)
 		return (NULL);
 	if (start >= ft_strlen(s))
 		i = 0;
@@ -40,12 +40,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	p[j] = '\0';
 	return (p);
 }
-
-/*int main()
-{
-	char const *s;
-
-	s = strdup("1");
-	ft_substr(s, 42, 42000000);
-	return (0);
-}*/

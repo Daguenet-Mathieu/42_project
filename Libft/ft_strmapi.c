@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:34:13 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/17 21:15:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/22 20:37:00 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	char			*dup;
 
+	if (!f || !s)
+		return (NULL);
 	i = 0;
 	dup = ft_strdup(s);
 	if (!dup)
