@@ -6,36 +6,117 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 02:47:49 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/22 03:26:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:11:12 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *get_next_line(int fd)
+#include "get_next_line.h"
+
+int	ft_strlen(char *s1)
 {
-	int			r;
-	static char	*buf[FOPEN_MAX];
-	char		*tmp;
-	
-	r = 1;
-	if (verifn(buf[fd]));
-		return (substr(buf, fd, 1));
+	int	i;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	return (i);
+}
+
+int	verifn(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		if (buf[i] == "\n")
+			return (i);
+		i++;
+	}
+	return -1;
+}
+
+char	*ft_divstr(char **buf, i)
+{
+	int		i;
+	int		c;
+	char	*tmp;
+	char	*tmp2;
+	i = i + 1;
+	c = 0;
+	tmp = malloc(i + 1);
+	while (c < i)
+		tmp[c] = (*buf)[c];
+	tmp[c] = 0;
+	i = i + 1;
+	c = 0;
+	tmp2 = malloc(ft_strlen(&buf[i]) + 1);
+	while ((*buf)[i])
+		tmp2[c++] = (*buf)[i++];
+	tmp2[c] = 0;
+	free(*buf);
+	*buf = tmp2;
+	return (tmp);
+}
+
+char	*ft_join(char *s1, char *s2)
+{
+	int		size;
+	char	*s3;
+	int		c;
+	int		i;
+
+	size = ft_strlen(s1) + ft_strlen(s2);
+	s3 = malloc(size + 1);
+	c = 0;
+	i = 0;
+	while (s1[c])
+		s3[c] = s1[c+ +];
+	while (s2[c])
+		s3[c++] = s2[i++];
+	s3[c] = 0;
+	free(s1);
+	free(s2);
+	return (s3);
+}
+
+void	*ft_free(char **buf)
+{
+	free(*buf);
+	return (NULL);
+}
+
+char	*ft_loop(char *tmp, char **buf[fd], int r)
+{	
 	while (r)
 	{
 		tmp = malloc(BUFFER_SIZE + 1);
 		if (!tmp)
 			return (NULL);
+		tmp[BUFFER_SIZE] = 0;
 		r = read(fd, tmp, BUFFER_SIZE);
 		if (r <= 0)
-			return (free(buf));
-		if (r < BUFFER_SIZE && !verifn(tmp))
 		{
-			ft_free(buf);
-			return (tmp);
+			if (buf[fd] && buf[fd][0] != 0)
+				return (ft_divstr(&buf[fd], verifn(buf[fd])));
+			if (buf[fd])
+				return (ft_free(&buf[fd]));
+			return (NULL);	
 		}
-		if (r < BUFFER_SIZE)
-			return(ft_substr(buff, fd, 1));	
-		buf[fd] = ft_strjoin(buf[fd], tmp);
+		buf[fd] = ft_join(buf[fd], tmp);
 		if (verifn(buf[fd]))
-			return (ft_substr(buf, fd, 1));
+			return (ft_divstr(buf[fd], verifn(buf[fd])));
 	}
+}
+
+char *get_next_line(int fd)
+{
+	int			r;
+	static char	*buf[1024];
+	char		*tmp;
+	
+	r = 1;
+	if (buf[fd] && verifn(buf[fd]));
+		return (ft_divstr(&buf[fd], verifn(buf[fd])));
+	return (ft_loop(tmp, &buf[fd], r));
 }
