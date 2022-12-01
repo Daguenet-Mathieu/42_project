@@ -6,12 +6,11 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 02:47:49 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/01 19:49:31 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/30 23:07:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 int	ft_strlen(char *s1)
 {
@@ -28,8 +27,6 @@ int	verifn(char *buf)
 	int	i;
 
 	i = 0;
-	if (!buf)
-		return (-1);
 	while (buf[i])
 	{
 		if (buf[i] == '\n')
@@ -44,19 +41,12 @@ char	*ft_divstr(char **buf, int i)
 	int		c;
 	char	*tmp;
 	char	*tmp2;
+	i = i + 1;
 	c = 0;
-	tmp = malloc(i + 2);
-	while (c <= i)
-	{
+	tmp = malloc(i + 1);
+	while (c < i)
 		tmp[c] = (*buf)[c];
-		c++;
-	}
 	tmp[c] = 0;
-	if (!(*buf)[i + 1])
-	{
-		free(*buf);
-		return (tmp);
-	}
 	i = i + 1;
 	c = 0;
 	tmp2 = malloc(ft_strlen(buf[i]) + 1);
@@ -74,19 +64,14 @@ char	*ft_join(char *s1, char *s2)
 	char	*s3;
 	int		c;
 	int		i;
-	if (!s1)
-	{
-		s3 = malloc(ft_strlen(s2));
-		return (s3);
-	}
+
 	size = ft_strlen(s1) + ft_strlen(s2);
 	s3 = malloc(size + 1);
-	c = 0;
+	c = -1;
 	i = 0;
-	while (s1[i])
-		s3[c++] = s1[i++];
-	i = 0;
-	while (s2[i])
+	while (s1[++c])
+		s3[c] = s1[c];
+	while (s2[c])
 		s3[c++] = s2[i++];
 	s3[c] = 0;
 	free(s1);
@@ -101,7 +86,7 @@ void	*ft_free(char **buf)
 }
 
 char	*ft_loop(char *tmp, char **buf, int r, int fd)
-{
+{	
 	while (r)
 	{
 		tmp = malloc(BUFFER_SIZE + 1);
@@ -109,19 +94,19 @@ char	*ft_loop(char *tmp, char **buf, int r, int fd)
 			return (FT_NULL);
 		tmp[BUFFER_SIZE] = 0;
 		r = read(fd, tmp, BUFFER_SIZE);
-		printf("%s",tmp);
-		buf[fd] = ft_join(buf[fd], tmp);
-		if (r < 0)
-			return (ft_free(buf));
-		if (r == 0)
+		if (r <= 0)
 		{
-			if (buf[fd] && buf[fd][1] != 0)
+			if (buf[fd] && buf[fd][0] != 0)
 				return (ft_divstr(&buf[fd], verifn(buf[fd])));
-			if (verifn(buf[fd]) != -1)
-				return (ft_divstr(&buf[fd], verifn(buf[fd])));
+			if (buf[fd])
+				return (ft_free(&buf[fd]));
+			return (FT_NULL);
 		}
+		buf[fd] = ft_join(buf[fd], tmp);
+		if (verifn(buf[fd]) != -1)
+			return (ft_divstr(&buf[fd], verifn(buf[fd])));
 	}
-	return ((char*)FT_NULL);
+	return ((char *)FT_NULL);
 }
 
 char *get_next_line(int fd)
@@ -132,9 +117,7 @@ char *get_next_line(int fd)
 	
 	r = 1;
 	tmp = FT_NULL;
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (FT_NULL);
 	if (buf[fd] && verifn(buf[fd]) != -1)
 		return (ft_divstr(&buf[fd], verifn(buf[fd])));
-	return (ft_loop(tmp, &buf[fd], r, fd));
+	return (ft_loop(tmp, buf, r, fd));
 }
