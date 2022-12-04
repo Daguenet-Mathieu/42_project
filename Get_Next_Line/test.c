@@ -15,7 +15,7 @@ void	test(char  **tab)
 //	free(tab[0]);
 //	free(tab);
 }
-int main(int ac, char **av, char **e)
+int main(/*int ac, char **av, char **e*/)
 {
 //char *tab[2];
 
@@ -60,9 +60,12 @@ int main(int ac, char **av, char **e)
   		int i = 0; 
     	t = open("test", O_RDONLY);
 		char	*r;
-		while (i < 3)
+		int o = 1;
+		while (o)
 		{
 			r = get_next_line(t);
+			if (!r)
+				o = 0;
 			printf(" test : %s", r);
 			free (r);
 			i++;

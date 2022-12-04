@@ -5,136 +5,156 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 02:47:49 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/01 19:49:31 by madaguen         ###   ########.fr       */
+/*   Created: 2022/12/03 17:01:33 by madaguen          #+#    #+#             */
+/*   Updated: 2022/12/04 06:28:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int	ft_strlen(char *s1)
+int	ft_strlen(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
-int	verifn(char *buf)
+int	verifn(char *str)
 {
 	int	i;
-
+	
 	i = 0;
-	if (!buf)
-		return (-1);
-	while (buf[i])
+	while (str[i])
 	{
-		if (buf[i] == '\n')
+		if (str[i] == '\n')
 			return (i);
 		i++;
 	}
-	return -1;
+	return (-1);
 }
 
-char	*ft_divstr(char **buf, int i)
+char	*ft_divstr(char **str, int i)
 {
-	int		c;
+	char	*s;
 	char	*tmp;
-	char	*tmp2;
+	int		c;
+	int		j;
+	char	*buf;
 	c = 0;
-	tmp = malloc(i + 2);
-	while (c <= i)
-	{
-		tmp[c] = (*buf)[c];
-		c++;
-	}
+	j = 0;
+	buf = *str;
+	s = malloc(i + 2);
+	if (!s)
+		return (NULL);
+	while (j <= i)
+		s[c++] = (*str)[j++];
+	s[c] = 0;
+	c = 0;
+	tmp = malloc(ft_strlen(&buf[i + 1]) + 1);
+	if (!tmp)
+		return (NULL);
+	while ((*str)[j])
+		tmp[c++] = (*str)[j++];
 	tmp[c] = 0;
-	if (!(*buf)[i + 1])
-	{
-		free(*buf);
-		return (tmp);
-	}
-	i = i + 1;
+	free(*str);
+	*str = tmp;
+	return (s);
+}
+
+char	*ft_strjoin(char **s1, char *s2)
+{
+	char	*dst;
+	int		i;
+	int		c;
+
 	c = 0;
-	tmp2 = malloc(ft_strlen(buf[i]) + 1);
-	while ((*buf)[i])
-		tmp2[c++] = (*buf)[i++];
-	tmp2[c] = 0;
-	free(*buf);
-	*buf = tmp2;
+	i = 0;
+	dst = malloc(ft_strlen(*s1) + ft_strlen(s2) + 1);
+	if (!dst)
+		return (NULL);
+	while ((*s1)[i])
+		dst[c++] = (*s1)[i++]; 
+	 i = 0;
+	 while (s2[i])
+		 dst[c++] = (*s1)[i++];
+	 dst[c] = 0;
+	 free(*s1);
+	 *s1 = NULL;
+	 free(s2);
+	 return (dst);
+}
+
+char	*ft_strdup(char **str)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	if (!*str)
+		return (NULL);
+	tmp = malloc(ft_strlen(*str) + 1);
+	if (!tmp)
+		return (NULL);
+	while ((*str)[i])
+	{
+		tmp[i] = (*str)[i];
+		i++;
+	}
+	tmp[i] = 0;
+	free(*str);
+	*str = NULL;
 	return (tmp);
 }
 
-char	*ft_join(char *s1, char *s2)
+char	*ft_read(char **buf, int fd)
 {
-	int		size;
-	char	*s3;
-	int		c;
-	int		i;
-	if (!s1)
-	{
-		s3 = malloc(ft_strlen(s2));
-		return (s3);
-	}
-	size = ft_strlen(s1) + ft_strlen(s2);
-	s3 = malloc(size + 1);
-	c = 0;
-	i = 0;
-	while (s1[i])
-		s3[c++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		s3[c++] = s2[i++];
-	s3[c] = 0;
-	free(s1);
-	free(s2);
-	return (s3);
-}
+	int		r;
+	char	*tmp;
 
-void	*ft_free(char **buf)
-{
-	free(*buf);
-	return (FT_NULL);
-}
-
-char	*ft_loop(char *tmp, char **buf, int r, int fd)
-{
-	while (r)
+	while (1)
 	{
+		if (verifn(*buf) != -1)
+			return (ft_divstr(buf, verifn(*buf)));
+
 		tmp = malloc(BUFFER_SIZE + 1);
 		if (!tmp)
-			return (FT_NULL);
-		tmp[BUFFER_SIZE] = 0;
+			return (NULL);
 		r = read(fd, tmp, BUFFER_SIZE);
-		printf("%s",tmp);
-		buf[fd] = ft_join(buf[fd], tmp);
-		if (r < 0)
-			return (ft_free(buf));
-		if (r == 0)
-		{
-			if (buf[fd] && buf[fd][1] != 0)
-				return (ft_divstr(&buf[fd], verifn(buf[fd])));
-			if (verifn(buf[fd]) != -1)
-				return (ft_divstr(&buf[fd], verifn(buf[fd])));
-		}
+		if (r <= 0)
+			return (ft_strdup(buf));
+		*buf = ft_strjoin(buf, tmp);
 	}
-	return ((char*)FT_NULL);
+	return (NULL);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	int			r;
 	static char	*buf[1024];
-	char		*tmp;
-	
-	r = 1;
-	tmp = FT_NULL;
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (FT_NULL);
-	if (buf[fd] && verifn(buf[fd]) != -1)
+	int		r;
+
+	if (fd < 0 || fd > 1024)
+		return (NULL);
+	if (!buf[fd])
+	{
+		buf[fd] = malloc(BUFFER_SIZE + 1);
+		if (!buf[fd])
+			return (NULL);
+	   	r = read(fd, buf[fd], BUFFER_SIZE);
+		printf("%d",r);
+		if (r <= 0)
+		{
+			free(buf[fd]);
+			return (NULL);
+		}
+		buf[fd][r] = 0;
+		if (r < BUFFER_SIZE && verifn(buf[fd]) == -1)
+			return (ft_strdup(&buf[fd]));
+	}
+	if (verifn(buf[fd]) != -1)
 		return (ft_divstr(&buf[fd], verifn(buf[fd])));
-	return (ft_loop(tmp, &buf[fd], r, fd));
+	return (ft_read(&buf[fd], fd));
 }
