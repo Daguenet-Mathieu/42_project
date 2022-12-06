@@ -6,36 +6,11 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:01:33 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/04 06:28:30 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:35:08 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	verifn(char *str)
-{
-	int	i;
-	
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 char	*ft_divstr(char **str, int i)
 {
@@ -44,17 +19,18 @@ char	*ft_divstr(char **str, int i)
 	int		c;
 	int		j;
 	char	*buf;
+
 	c = 0;
 	j = 0;
 	buf = *str;
-	s = malloc(i + 2);
+	s = ft_calloc(i + 2);
 	if (!s)
 		return (NULL);
 	while (j <= i)
 		s[c++] = (*str)[j++];
 	s[c] = 0;
 	c = 0;
-	tmp = malloc(ft_strlen(&buf[i + 1]) + 1);
+	tmp = ft_calloc(ft_strlen(&buf[i + 1]) + 1);
 	if (!tmp)
 		return (NULL);
 	while ((*str)[j])
@@ -65,7 +41,7 @@ char	*ft_divstr(char **str, int i)
 	return (s);
 }
 
-char	*ft_strjoin(char **s1, char *s2)
+char	*ft_strjoin(char **s1, char **s2)
 {
 	char	*dst;
 	int		i;
@@ -73,19 +49,20 @@ char	*ft_strjoin(char **s1, char *s2)
 
 	c = 0;
 	i = 0;
-	dst = malloc(ft_strlen(*s1) + ft_strlen(s2) + 1);
+	dst = ft_calloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	if (!dst)
 		return (NULL);
 	while ((*s1)[i])
-		dst[c++] = (*s1)[i++]; 
-	 i = 0;
-	 while (s2[i])
-		 dst[c++] = (*s1)[i++];
-	 dst[c] = 0;
-	 free(*s1);
-	 *s1 = NULL;
-	 free(s2);
-	 return (dst);
+		dst[c++] = (*s1)[i++];
+	i = 0;
+	while ((*s2)[i])
+		dst[c++] = (*s2)[i++];
+	dst[c] = 0;
+	free(*s1);
+	*s1 = NULL;
+	free(*s2);
+	*s2 = NULL;
+	return (dst);
 }
 
 char	*ft_strdup(char **str)
@@ -96,7 +73,7 @@ char	*ft_strdup(char **str)
 	i = 0;
 	if (!*str)
 		return (NULL);
-	tmp = malloc(ft_strlen(*str) + 1);
+	tmp = ft_calloc(ft_strlen(*str) + 1);
 	if (!tmp)
 		return (NULL);
 	while ((*str)[i])
@@ -107,6 +84,11 @@ char	*ft_strdup(char **str)
 	tmp[i] = 0;
 	free(*str);
 	*str = NULL;
+	if (tmp[0] == 0)
+	{
+		free(tmp);
+		return (NULL);
+	}
 	return (tmp);
 }
 
@@ -119,14 +101,18 @@ char	*ft_read(char **buf, int fd)
 	{
 		if (verifn(*buf) != -1)
 			return (ft_divstr(buf, verifn(*buf)));
-
-		tmp = malloc(BUFFER_SIZE + 1);
+		tmp = ft_calloc(BUFFER_SIZE + 1);
 		if (!tmp)
 			return (NULL);
 		r = read(fd, tmp, BUFFER_SIZE);
 		if (r <= 0)
+		{
+			free(tmp);
 			return (ft_strdup(buf));
-		*buf = ft_strjoin(buf, tmp);
+		}
+		*buf = ft_strjoin(buf, &tmp);
+		if (r < BUFFER_SIZE && verifn(*buf) == -1)
+			return (ft_strdup(buf));
 	}
 	return (NULL);
 }
@@ -134,20 +120,20 @@ char	*ft_read(char **buf, int fd)
 char	*get_next_line(int fd)
 {
 	static char	*buf[1024];
-	int		r;
+	int			r;
 
-	if (fd < 0 || fd > 1024)
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE < 0)
 		return (NULL);
 	if (!buf[fd])
 	{
-		buf[fd] = malloc(BUFFER_SIZE + 1);
+		buf[fd] = ft_calloc(BUFFER_SIZE + 1);
 		if (!buf[fd])
 			return (NULL);
-	   	r = read(fd, buf[fd], BUFFER_SIZE);
-		printf("%d",r);
+		r = read(fd, buf[fd], BUFFER_SIZE);
 		if (r <= 0)
 		{
 			free(buf[fd]);
+			buf[fd] = NULL;
 			return (NULL);
 		}
 		buf[fd][r] = 0;
