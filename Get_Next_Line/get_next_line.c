@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:01:33 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/06 22:35:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:23:08 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strjoin(char **s1, char **s2)
 
 	c = 0;
 	i = 0;
-	dst = ft_calloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
+	dst = malloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	if (!dst)
 		return (NULL);
 	while ((*s1)[i])
@@ -71,9 +71,15 @@ char	*ft_strdup(char **str)
 	int		i;
 
 	i = 0;
+	if ((*str)[0] == 0)
+	{
+		free(*str);
+		*str = NULL;
+		return (NULL);
+	}
 	if (!*str)
 		return (NULL);
-	tmp = ft_calloc(ft_strlen(*str) + 1);
+	tmp = malloc(ft_strlen(*str) + 1);
 	if (!tmp)
 		return (NULL);
 	while ((*str)[i])
@@ -84,11 +90,6 @@ char	*ft_strdup(char **str)
 	tmp[i] = 0;
 	free(*str);
 	*str = NULL;
-	if (tmp[0] == 0)
-	{
-		free(tmp);
-		return (NULL);
-	}
 	return (tmp);
 }
 
@@ -126,7 +127,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!buf[fd])
 	{
-		buf[fd] = ft_calloc(BUFFER_SIZE + 1);
+		buf[fd] = malloc(BUFFER_SIZE + 1);
 		if (!buf[fd])
 			return (NULL);
 		r = read(fd, buf[fd], BUFFER_SIZE);

@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:34:38 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/06 22:04:14 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:28:47 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ int main(/*int ac, char **av, char **e*/)
 			free(r);
 		 }
 	//printf("%d", t);
-	char *line;
+//	char *line;
 
-	while ((line = get_next_line(t)))
-	{
-		printf("%s", line);
-		free(line);	
-	}
-	free(line);
- 	return (0);
+//	while ((line = get_next_line(t)))
+//	{
+//		printf("%s", line);
+//		free(line);	
+//	}
+//	free(line);
+//	return (0);
 }
