@@ -6,11 +6,11 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:58:18 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/23 15:59:18 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:59:50 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_strlen(char *s)
 {
@@ -31,7 +31,7 @@ static char	*ft_strdup(char *s)
 	dst = malloc(ft_strlen(s) + 1);
 	if (!dst)
 		return (NULL);
-	while(s[i])
+	while (s[i])
 	{
 		dst[i] = s[i];
 		i++;

@@ -6,18 +6,18 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 17:58:28 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/23 20:49:48 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:56:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int	i;
-	int	len;
-	
+	int		i;
+	int		len;
+
 	i = 0;
 	len = 0;
 	if (!format)
@@ -26,7 +26,11 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] != '%')
+		{
 			len += ft_putchar(format[i]);
+			if (len == -1)
+				return (-1);
+		}	
 		else if (format[i + 1] && format[i] == '%' && isinchar(format[i + 1]))
 			len += handdle_letter(format[1 + i++], args);
 		else

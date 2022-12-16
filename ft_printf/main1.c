@@ -26,6 +26,8 @@ int main()
   printf("test 4 %p\n", str);
   ft_printf("%i %i", 2147483647, (int)-2147483648);
   ft_printf("%d", (int)-2147483648);
+  ft_printf("\n%p\n", &c);
+  printf("%p\n", &c);
   return 0;
 
 }

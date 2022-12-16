@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:53:18 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/23 15:53:45 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:58:09 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
+#include "ft_printf.h"
 
 int	ft_putnbr(int nb)
 {
@@ -25,8 +24,8 @@ int	ft_putnbr(int nb)
 		nb = nb * -1;
 	}
 	n = nb;
-	if (n >= 10 )
+	if (n >= 10)
 		i += ft_putnbr(n / 10);
 	i += ft_putchar((n % 10) + 48);
-	return (i); 
+	return (i);
 }
