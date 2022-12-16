@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:49:32 by madaguen          #+#    #+#             */
-/*   Updated: 2022/11/24 17:09:22 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:29:14 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	handdle_letter(char c, va_list args)
 
 	len = 0;
 	if (c == 's')
-		len += ft_putstr(va_arg(args, char *));
+		len += ft_putstr(va_arg(args, char*));
 	if (c == 'i' || c == 'd')
 		len += ft_putnbr(va_arg(args, int));
 	if (c == 'u')

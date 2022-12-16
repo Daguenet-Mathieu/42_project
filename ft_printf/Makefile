@@ -6,7 +6,7 @@
 #    By: madaguen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:04:28 by madaguen          #+#    #+#              #
-#    Updated: 2022/11/24 15:55:53 by madaguen         ###   ########.fr        #
+#    Updated: 2022/11/29 16:04:50 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ SRCS		= ft_printf.c		\
 	
 OBJS		= ${SRCS:.c=.o}
 HEADER		= ft_printf.h
-CC			= gcc
+CC			= cc
 FLAGS		= -Wall -Wextra -Werror
 NAME		= libftprintf.a
 
-%.o: %.c ${SRCS}
+%.o: %.c
 		$(CC) $(FLAGS) -c -o $@ $<
 
 $(NAME): ${OBJS} ${HEADER}
@@ -34,7 +34,7 @@ $(NAME): ${OBJS} ${HEADER}
 all: $(NAME)
 
 clean:
-		rm -f ${OBJS} ${OBJS_BONUS}
+		rm -f ${OBJS}
 
 fclean:	clean
 		rm -f ${NAME}
