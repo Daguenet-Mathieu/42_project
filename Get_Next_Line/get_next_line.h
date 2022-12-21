@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:44:25 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/07 16:59:13 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:09:15 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 12574440775
+#  define BUFFER_SIZE 1
 # endif
 
 int		ft_strlen(char *s1);

@@ -6,27 +6,11 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:38:13 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/07 11:38:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:07:37 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_calloc(size_t size)
-{
-	char		*tmp;
-	size_t		i;
-
-	if (size == 0)
-		return (NULL);
-	i = 0;
-	tmp = malloc(size);
-	if (!tmp)
-		return (NULL);
-	while (i < size)
-		tmp[i++] = 0;
-	return (tmp);
-}
 
 int	ft_strlen(char *s)
 {

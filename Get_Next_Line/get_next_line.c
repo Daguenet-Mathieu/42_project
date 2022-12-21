@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:01:33 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/07 16:23:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:38:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ char	*ft_divstr(char **str, int i)
 	c = 0;
 	j = 0;
 	buf = *str;
-	s = ft_calloc(i + 2);
+	s = malloc(i + 2);
 	if (!s)
 		return (NULL);
 	while (j <= i)
 		s[c++] = (*str)[j++];
 	s[c] = 0;
 	c = 0;
-	tmp = ft_calloc(ft_strlen(&buf[i + 1]) + 1);
+	tmp = malloc(ft_strlen(&buf[i + 1]) + 1);
 	if (!tmp)
 		return (NULL);
 	while ((*str)[j])
@@ -93,27 +93,27 @@ char	*ft_strdup(char **str)
 	return (tmp);
 }
 
-char	*ft_read(char **buf, int fd)
+char	*ft_read(char **buf, int fd, int *r)
 {
-	int		r;
 	char	*tmp;
 
 	while (1)
 	{
+		if (*r < BUFFER_SIZE && verifn(*buf) == -1)
+			return (ft_strdup(buf));
 		if (verifn(*buf) != -1)
 			return (ft_divstr(buf, verifn(*buf)));
-		tmp = ft_calloc(BUFFER_SIZE + 1);
+		tmp = malloc(BUFFER_SIZE + 1);
 		if (!tmp)
 			return (NULL);
-		r = read(fd, tmp, BUFFER_SIZE);
-		if (r <= 0)
+		*r = read(fd, tmp, BUFFER_SIZE);
+		tmp[*r] = 0;
+		if (*r <= 0)
 		{
 			free(tmp);
 			return (ft_strdup(buf));
 		}
 		*buf = ft_strjoin(buf, &tmp);
-		if (r < BUFFER_SIZE && verifn(*buf) == -1)
-			return (ft_strdup(buf));
 	}
 	return (NULL);
 }
@@ -123,6 +123,7 @@ char	*get_next_line(int fd)
 	static char	*buf[1024];
 	int			r;
 
+	r = 0;
 	if (fd < 0 || fd > 1024 || BUFFER_SIZE < 0)
 		return (NULL);
 	if (!buf[fd])
@@ -138,10 +139,34 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buf[fd][r] = 0;
-		if (r < BUFFER_SIZE && verifn(buf[fd]) == -1)
-			return (ft_strdup(&buf[fd]));
 	}
 	if (verifn(buf[fd]) != -1)
 		return (ft_divstr(&buf[fd], verifn(buf[fd])));
-	return (ft_read(&buf[fd], fd));
+	return (ft_read(&buf[fd], fd, &r));
+}
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+
+int main()
+{
+	int fd = open("big_line_no_nl", O_RDONLY);
+	int a = 1;
+	char *line;
+	while (a)
+	{
+		line = get_next_line(fd);
+		printf("res = %s", line);
+		if(!line)
+			a = 0;
+		free(line);
+	}
+	// line = get_next_line(fd);
+	// printf("%s", line);
+	//line = get_next_line(fd);
+	//printf("%s", line);
+	//free(line);
+
 }
