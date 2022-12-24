@@ -99,8 +99,6 @@ char	*ft_read(char **buf, int fd, int *r)
 
 	while (1)
 	{
-		if (*r < BUFFER_SIZE && verifn(*buf) == -1)
-			return (ft_strdup(buf));
 		if (verifn(*buf) != -1)
 			return (ft_divstr(buf, verifn(*buf)));
 		tmp = malloc(BUFFER_SIZE + 1);
@@ -114,6 +112,8 @@ char	*ft_read(char **buf, int fd, int *r)
 			return (ft_strdup(buf));
 		}
 		*buf = ft_strjoin(buf, &tmp);
+		if (*r < BUFFER_SIZE && verifn(*buf) == -1)
+			return (ft_strdup(buf));
 	}
 	return (NULL);
 }
@@ -139,6 +139,8 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buf[fd][r] = 0;
+		if (r < BUFFER_SIZE && verifn(buf[fd]) == -1)
+			return (ft_strdup(&buf[fd]));
 	}
 	if (verifn(buf[fd]) != -1)
 		return (ft_divstr(&buf[fd], verifn(buf[fd])));
@@ -152,7 +154,7 @@ char	*get_next_line(int fd)
 
 int main()
 {
-	int fd = open("big_line_no_nl", O_RDONLY);
+	int fd = open("43_with_nl", O_RDONLY);
 	int a = 1;
 	char *line;
 	while (a)
@@ -170,3 +172,4 @@ int main()
 	//free(line);
 
 }
+
