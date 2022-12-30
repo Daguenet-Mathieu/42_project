@@ -219,13 +219,13 @@ char	*get_next_line(int fd)
 
 int main()
 {
-	int fd = open("big_line_with_nl", O_RDONLY);
+	int fd = open("bible2.txt", O_RDONLY);
 	int a = 1;
 	char *line;
 	while (a)
 	{
 		line = get_next_line(fd);
-		//printf("res = %s", line);
+		printf("res = %s", line);
 		if(!line)
 			a = 0;
 		free(line);

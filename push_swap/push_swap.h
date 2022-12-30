@@ -24,16 +24,21 @@ typedef struct s_list
 	struct s_list	*prev;
 }					t_list;
 
-t_list		*lst_new(int a);
-void		swap(t_list **lsta, t_list **lstb);
-void		push(t_list **lsta, t_list **t_lstb);
-void		add_front(t_list **lst, t_list *new);
-void		add_back(t_list **lst, t_list *new);
-int			lst_size(t_list **lst);
-void		radix_sort(t_list **lst);
-void		sort(t_list **lst);
-char		*get_next_line(int fd);
-int			ft_atoi(char *nbr);
+typedef	struct s_step
+{
+	int		step;
+	s_step	*next;
+}			t_step;
 
+t_list	*lst_new(int a);
+void	swap(t_list **lsta, t_list **lstb);
+void	push(t_list **lsta, t_list **t_lstb);
+void	add_back(t_list **lst, t_list *new);
+int		lst_size(t_list **lst);
+void	radix_sort(t_list **lst);
+void	sort(t_list **lst);
+char	*get_next_line(int fd);
+int		ft_atoi(char *nbr, int *nb);
+void	ft_lst_clear(t_list **a, t_step **step);
 
 #endif

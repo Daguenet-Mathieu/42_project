@@ -154,7 +154,7 @@ char	*get_next_line(int fd)
 
 int main()
 {
-	int fd = open("43_with_nl", O_RDONLY);
+	int fd = open("bible2.txt", O_RDONLY);
 	int a = 1;
 	char *line;
 	while (a)

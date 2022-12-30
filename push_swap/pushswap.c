@@ -1,41 +1,23 @@
-void	get_lst(t_list **a)
-{
-
-}
-
-void	ft_create_stack(int ac, char **av, t_list **a)
-{
-	int 	i;
-	t_list	*new;
-
-	i = 1;
-	{
-		while (i < ac)
-			{
-				new = lst_new(ft_atoi(av[i]));
-				if(!new)
-				{
-					ft_lst_clear(&a);
-					return (0);
-				}
-				lst_add_back(&a, new);
-			}
-	}
-}
+#include <push_swap.h>
 
 int	main(int ac, char **av)
 {
 	t_list	*a;
-
+	char	**tab;
+	int		check;
 	a = NULL;
 	if (ac == 1)
 	{
-		get_lst(&a);
-		if (!*a)
-			return (0);
+		tab = ft_get_stdin();
+			if (!tab)
+				return (error());
+		check = ft_create_stack(ft_tablen(tab), tab, &a);
+		free_tab(tab);
 	}
 	else
-		ft_create_stack(ac, av, &a)
-	ft_sort(&a);
-	ft_swap(&a);
+		check = ft_create_stack(ac - 1, &av[1], &a);
+	if (!check)
+		return (error());
+	if (!ft_sort(&a))
+		return (error());
 }
