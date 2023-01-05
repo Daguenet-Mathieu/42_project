@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:25:47 by madaguen          #+#    #+#             */
-/*   Updated: 2022/12/20 20:44:09 by madaguen         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:46:59 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000 
+#  define BUFFER_SIZE 1 
 # endif
 #include <stdlib.h>
 #include <unistd.h>
