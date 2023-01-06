@@ -6,7 +6,7 @@
 /*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:47:28 by madaguen          #+#    #+#             */
-/*   Updated: 2023/01/06 19:36:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:54:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ char	*get_next_line(int fd)
 		find_nl(buf[fd], &i[0], &i[1]);
 		if (buf[fd])
 			lst_new_add(&start, &buf[fd], i);
-		if (i[1] != -1 || i[2] == 0)
+		if (i[1] != -1 || (i[2] < BUFFER_SIZE && i[2] > -1))
 			return (ft_lst_join(&start, &buf[fd]));
 		buf[fd] = malloc(BUFFER_SIZE + 1);
 		if (!buf[fd])
@@ -159,29 +159,29 @@ char	*get_next_line(int fd)
 	}
 	return (NULL);
 }
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
-
-int main()
-{
-	int fd = open("1-brouette.txt", O_RDONLY);
-	int a = 1;
-	char *line;
-	while (a)
-	{
-		line = get_next_line(fd);
-		printf("res = %s", line);
-		if(!line)
-			a = 0;
-		free(line);
-	}
-	// line = get_next_line(fd);
-	// printf("%s", line);
-	//line = get_next_line(fd);
-	//printf("%s", line);
-	//free(line);
-	
-}
+//
+//#include <sys/types.h>
+//#include <sys/stat.h>
+//#include <fcntl.h>
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int fd = open("1-brouette.txt", O_RDONLY);
+//	int a = 1;
+//	char *line;
+//	while (a)
+//	{
+//		line = get_next_line(fd);
+//		printf("res = %s", line);
+//		if(!line)
+//			a = 0;
+//		free(line);
+//	}
+//	// line = get_next_line(fd);
+//	// printf("%s", line);
+//	//line = get_next_line(fd);
+//	//printf("%s", line);
+//	//free(line);
+//	
+//}
